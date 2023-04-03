@@ -142,13 +142,23 @@ const MultiLevelCardSortingTool = () => {
                     <h2>{category.title}</h2>
                     <div className="cards-container">
                         {category.cards.map((card) => (
-                            <Card
+                            // <Card
+                            //     key={card.id}
+                            //     id={card.id}
+                            //     title={card.title}
+                            //     category={category.title}
+                            //     onDrop={handleCardDrop}
+                            // />
+                            <div
                                 key={card.id}
-                                id={card.id}
-                                title={card.title}
-                                category={category.title}
-                                onDrop={handleCardDrop}
-                            />
+                                className="card"
+                                draggable
+                                onDragStart={e => e.dataTransfer.setData('cardId', card.id.toString())}
+                                // onDragEnd={() => setDraggedCategory(null)}
+                                onDrop={e => handleCardDrop(e, category.id)}
+                            >
+                                {card.title}
+                            </div>
                         ))}
                     </div>
                     {category.subcategories &&
@@ -157,24 +167,34 @@ const MultiLevelCardSortingTool = () => {
                                 <h3>{subcategory.title}</h3>
                                 <div className="cards-container">
                                     {subcategory.cards.map((card) => (
-                                        <Card
+                                        // <Card
+                                        //     key={card.id}
+                                        //     id={card.id}
+                                        //     title={card.title}
+                                        //     category={category.title}
+                                        //     subcategory={subcategory.title}
+                                        //     onDrop={handleCardDrop}
+                                        // />
+                                        <div
                                             key={card.id}
-                                            id={card.id}
-                                            title={card.title}
-                                            category={category.title}
-                                            subcategory={subcategory.title}
-                                            onDrop={handleCardDrop}
-                                        />
+                                            className="card"
+                                            draggable
+                                            onDragStart={e => e.dataTransfer.setData('cardId', card.id.toString())}
+                                            // onDragEnd={() => setDraggedCategory(null)}
+                                            onDrop={e => handleCardDrop(e, category.id)}
+                                        >
+                                            {card.title}
+                                        </div>
                                     ))}
                                 </div>
                             </div>
                         ))}
                 </div>
             ))}
-            <div className="category add-category">
+            {/* <div className="category add-category">
                 <h2>Add a category</h2>
                 <CategoryForm onAdd={(title) => setCategories([...categories, { title, cards: [], subcategories: null }])} />
-            </div>
+            </div> */}
         </div>
     );
 };
